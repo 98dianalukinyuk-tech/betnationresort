@@ -1,76 +1,728 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
-<title>Betnation casino hotel Amsterdam</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Betnation casino hotel Amsterdam</title>
+  <meta name="theme-color" content="#0b0d12" />
+  <style>
+    :root{
+      --bg:#0b0d12;
+      --bg-soft:#121621;
+      --panel:rgba(14,18,28,.78);
+      --panel-strong:#121726;
+      --line:rgba(255,255,255,.1);
+      --line-strong:rgba(255,255,255,.16);
+      --text:#f5f2ec;
+      --muted:#c1b9ad;
+      --gold:#d6a95f;
+      --gold-soft:#f0cf94;
+      --shadow:0 24px 80px rgba(0,0,0,.38);
+      --radius-xl:30px;
+      --radius-lg:22px;
+      --radius-md:18px;
+      --container:min(1200px, calc(100% - 34px));
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(214,169,95,.16), transparent 32rem),
+        radial-gradient(circle at 90% 18%, rgba(46,79,126,.16), transparent 38rem),
+        linear-gradient(180deg, #0a0c11 0%, #090b10 100%);
+      line-height:1.7;
+      overflow-x:hidden;
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.14;
+      z-index:99;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
+    }
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    p{margin:0 0 18px}
+    .container{width:var(--container);margin-inline:auto;position:relative;z-index:2}
+    .progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-soft));z-index:120;box-shadow:0 0 18px rgba(214,169,95,.45)}
+
+    .topbar{
+      position:sticky;
+      top:14px;
+      z-index:110;
+      padding-top:14px;
+    }
+    .nav-shell{
+      width:var(--container);
+      margin-inline:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      padding:14px 18px;
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:999px;
+      background:rgba(10,12,18,.58);
+      backdrop-filter:blur(18px);
+      box-shadow:0 14px 40px rgba(0,0,0,.24);
+      transition:background .3s ease,border-color .3s ease,transform .3s ease;
+    }
+    .nav-brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+      font-weight:700;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:.84rem;
+      color:#fff5df;
+    }
+    .nav-brand-mark{
+      width:34px;height:34px;border-radius:50%;
+      display:grid;place-items:center;
+      background:radial-gradient(circle at 30% 30%, #f0d59e, #b78335 72%);
+      box-shadow:0 8px 22px rgba(214,169,95,.35);
+      color:#161109;
+      font-size:1rem;
+    }
+    .nav-links{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}
+    .nav-links a{
+      color:#ddd5c9;
+      font-size:.92rem;
+      padding:10px 14px;
+      border-radius:999px;
+      transition:.25s ease;
+    }
+    .nav-links a:hover{background:rgba(255,255,255,.08);color:#fff}
+
+    .hero-wrap{padding:24px 0 28px}
+    .hero{
+      position:relative;
+      min-height:88vh;
+      border-radius:34px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+      background:#0f131c;
+      isolation:isolate;
+    }
+    .hero-media,
+    .hero-media::after,
+    .hero-media::before{position:absolute;inset:0}
+    .hero-media img{
+      width:100%;height:100%;object-fit:cover;
+      transform:scale(1.02);
+      filter:saturate(1.02) contrast(1.03);
+    }
+    .hero-media::before{
+      content:"";
+      background:linear-gradient(90deg, rgba(6,8,14,.88) 0%, rgba(6,8,14,.66) 42%, rgba(6,8,14,.28) 72%, rgba(6,8,14,.12) 100%);
+      z-index:1;
+    }
+    .hero-media::after{
+      content:"";
+      background:linear-gradient(180deg, rgba(0,0,0,.18), rgba(4,5,8,.55) 72%, rgba(6,8,13,.88));
+      z-index:1;
+    }
+    .hero-grid{
+      position:relative;
+      z-index:2;
+      min-height:88vh;
+      display:grid;
+      grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);
+      align-items:end;
+      gap:26px;
+      padding:72px 34px 32px;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      margin-bottom:20px;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:999px;
+      background:rgba(12,15,23,.4);
+      color:#eee0bf;
+      font-size:.88rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      backdrop-filter:blur(10px);
+    }
+    .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 5px rgba(214,169,95,.15)}
+    h1,h2,h3{font-family:Georgia, "Times New Roman", serif;line-height:1.06;letter-spacing:-.03em;margin:0}
+    h1{font-size:clamp(3.2rem, 7.2vw, 6.6rem);max-width:10ch;text-wrap:balance}
+    .hero-copy p{
+      max-width:62ch;
+      color:#f0ece4;
+      font-size:1.08rem;
+    }
+    .hero-copy p + p{margin-top:18px}
+    .hero-panel{
+      align-self:end;
+      display:grid;
+      gap:14px;
+    }
+    .glass-card{
+      padding:20px 22px;
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:24px;
+      background:linear-gradient(180deg, rgba(16,20,31,.8), rgba(12,15,24,.66));
+      backdrop-filter:blur(18px);
+      box-shadow:0 10px 34px rgba(0,0,0,.18);
+    }
+    .fact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .fact{
+      padding:14px 14px 12px;
+      border-radius:18px;
+      background:rgba(255,255,255,.045);
+      border:1px solid rgba(255,255,255,.08);
+      min-height:108px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .fact strong{font-size:1.45rem;color:#fff4dc;font-family:Georgia,serif;line-height:1}
+    .fact span{color:#cfc7b8;font-size:.92rem}
+    .lead-note{
+      color:#e5ddcf;
+      font-size:.99rem;
+      border-left:3px solid var(--gold);
+      padding-left:15px;
+      margin-top:4px;
+    }
+
+    .main-content{padding:18px 0 86px}
+    .section{
+      padding:40px 0 26px;
+      position:relative;
+    }
+    .section-anchor{position:relative;top:-100px;visibility:hidden}
+    .section-card{
+      position:relative;
+      display:grid;
+      grid-template-columns:minmax(240px,.42fr) minmax(0,.58fr);
+      gap:28px;
+      align-items:start;
+    }
+    .section-aside{
+      position:sticky;
+      top:108px;
+      padding:26px 24px;
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(16,20,31,.86), rgba(11,14,22,.72));
+      box-shadow:var(--shadow);
+    }
+    .section-index{
+      display:inline-flex;align-items:center;gap:12px;
+      color:#eed6a1;font-size:.84rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px;
+    }
+    .section-index::before{content:"";display:block;width:38px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+    h2{font-size:clamp(2.1rem,4.5vw,4rem);max-width:12ch}
+    .section-aside p{margin-top:16px;color:#bfb7aa}
+
+    .section-body{display:grid;gap:22px}
+    .content-box{
+      padding:24px 24px 28px;
+      background:linear-gradient(180deg, rgba(17,21,32,.84), rgba(12,15,23,.78));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+    }
+    .content-box p{color:#e4dfd6}
+    .content-box strong{color:#fff2d7}
+
+    .visual-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:30px;
+      border:1px solid rgba(255,255,255,.08);
+      background:#0f131b;
+      box-shadow:var(--shadow);
+      min-height:360px;
+    }
+    .visual-card img{width:100%;height:100%;object-fit:cover;transition:transform .9s ease}
+    .visual-card:hover img{transform:scale(1.05)}
+    .visual-card::after{
+      content:"";
+      position:absolute;inset:0;
+      background:linear-gradient(180deg, rgba(5,6,10,.08), rgba(5,6,10,.15) 55%, rgba(5,6,10,.58));
+      pointer-events:none;
+    }
+    .visual-caption{
+      position:absolute;left:18px;right:18px;bottom:16px;z-index:2;
+      display:flex;justify-content:space-between;gap:12px;align-items:end;
+      color:#fffaf0;
+      font-size:.92rem;
+    }
+    .visual-caption strong{display:block;font-family:Georgia,serif;font-size:1.2rem;font-weight:500;letter-spacing:-.02em}
+    .visual-caption span{color:#ded5c6}
+
+    .image-mosaic{display:grid;grid-template-columns:1.14fr .86fr;gap:18px}
+    .image-stack{display:grid;gap:18px}
+    .image-stack .visual-card{min-height:171px}
+
+    .stats-strip{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-top:8px;
+    }
+    .stat-chip{
+      padding:14px 16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .stat-chip strong{display:block;font-size:1.08rem;color:#fff0cc;margin-bottom:4px}
+    .stat-chip span{font-size:.9rem;color:#c7c0b3}
+
+    .services-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .services-grid .visual-card{min-height:220px}
+
+    ul.feature-list{list-style:none;padding:0;margin:8px 0 24px;display:grid;gap:12px}
+    ul.feature-list li{
+      position:relative;
+      padding:18px 18px 18px 50px;
+      border-radius:18px;
+      background:rgba(255,255,255,.045);
+      border:1px solid rgba(255,255,255,.08);
+      color:#e5ddd2;
+    }
+    ul.feature-list li::before{
+      content:"";
+      position:absolute;left:20px;top:27px;
+      width:9px;height:9px;border-radius:50%;
+      background:var(--gold);
+      box-shadow:0 0 0 5px rgba(214,169,95,.12);
+    }
+
+    .immersive-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:32px;
+      border:1px solid rgba(255,255,255,.08);
+      min-height:420px;
+      background:#10141d;
+      box-shadow:var(--shadow);
+    }
+    .immersive-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .immersive-card::after{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(90deg, rgba(7,10,16,.85), rgba(7,10,16,.52) 42%, rgba(7,10,16,.25) 100%);
+    }
+    .immersive-copy{position:relative;z-index:2;max-width:760px;padding:34px 30px}
+    .immersive-copy p{color:#eee7db;font-size:1.08rem}
+
+    .practical-grid{display:grid;grid-template-columns:1fr .92fr;gap:18px}
+    .practical-grid .visual-card{min-height:100%;}
+
+    .faq-shell{
+      border-radius:32px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(15,18,28,.86), rgba(11,14,22,.78));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .faq-head{
+      padding:28px 28px 14px;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .faq-head p{max-width:65ch;color:#c9c1b4}
+    .faq-item{border-top:1px solid rgba(255,255,255,.06)}
+    .faq-toggle{
+      appearance:none;width:100%;text-align:left;background:none;border:0;cursor:pointer;color:inherit;
+      display:flex;justify-content:space-between;align-items:center;gap:16px;
+      padding:22px 28px;font:inherit;
+    }
+    .faq-toggle h3{font-size:1.26rem;font-weight:500}
+    .faq-icon{
+      flex:0 0 auto;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;
+      border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);font-size:1.15rem;color:#f1d7a3;
+      transition:transform .25s ease, background .25s ease;
+    }
+    .faq-answer{
+      display:grid;
+      grid-template-rows:0fr;
+      transition:grid-template-rows .35s ease;
+    }
+    .faq-answer > div{overflow:hidden}
+    .faq-answer p{padding:0 28px 24px;color:#e8e1d6}
+    .faq-item.active .faq-answer{grid-template-rows:1fr}
+    .faq-item.active .faq-icon{transform:rotate(45deg);background:rgba(214,169,95,.12)}
+
+    .closing-card{
+      margin-top:20px;
+      padding:26px 28px;
+      border-radius:26px;
+      background:linear-gradient(120deg, rgba(214,169,95,.11), rgba(255,255,255,.04));
+      border:1px solid rgba(214,169,95,.2);
+      font-size:1.05rem;
+      color:#f6f1e7;
+      box-shadow:0 18px 50px rgba(0,0,0,.24);
+    }
+
+    .footer-note{
+      padding:18px 0 34px;
+      color:#9f9789;
+      font-size:.9rem;
+      text-align:center;
+    }
+
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s ease, transform .8s ease}
+    .reveal.visible{opacity:1;transform:none}
+
+    @media (max-width: 1024px){
+      .hero-grid,
+      .section-card,
+      .practical-grid,
+      .image-mosaic{grid-template-columns:1fr}
+      .hero-grid{min-height:auto;padding:72px 26px 28px}
+      .hero{min-height:auto}
+      .section-aside{position:relative;top:auto}
+      .services-grid{grid-template-columns:1fr 1fr}
+      .hero-panel{grid-template-columns:1fr}
+    }
+    @media (max-width: 760px){
+      .nav-shell{padding:12px 14px;border-radius:24px;align-items:flex-start;flex-direction:column}
+      .nav-links{width:100%;justify-content:flex-start;overflow:auto;flex-wrap:nowrap;padding-bottom:2px}
+      h1{font-size:clamp(2.8rem, 14vw, 4.4rem)}
+      h2{font-size:clamp(2rem, 10vw, 3rem)}
+      .hero-grid{padding:64px 18px 18px}
+      .container{width:min(100% - 20px, 1200px)}
+      .fact-grid,
+      .stats-strip,
+      .services-grid{grid-template-columns:1fr}
+      .content-box,
+      .section-aside,
+      .visual-card,
+      .faq-shell,
+      .closing-card{border-radius:22px}
+      .faq-toggle{padding:20px 18px}
+      .faq-answer p{padding:0 18px 20px}
+      .faq-head{padding:22px 18px 10px}
+      .visual-caption{left:14px;right:14px;bottom:14px}
+    }
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .reveal{opacity:1;transform:none;transition:none}
+      .visual-card img{transition:none}
+    }
+  </style>
 </head>
 <body>
+  <div class="progress" aria-hidden="true"></div>
 
-<h1>Betnation: casino hotel aan de Javastraat</h1>
+  <header class="topbar">
+    <div class="nav-shell">
+      <a class="nav-brand" href="#top">
+        <span class="nav-brand-mark">B</span>
+        <span>Betnation</span>
+      </a>
+      <nav class="nav-links" aria-label="Hoofdnavigatie">
+        <a href="#speelvloer">Speelvloer</a>
+        <a href="#kamers">Kamers</a>
+        <a href="#diensten">Diensten</a>
+        <a href="#voordelen">Voordelen</a>
+        <a href="#praktisch">Praktisch</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+  </header>
 
-<p>Aan de Javastraat 1332 in Amsterdam-Oost combineert Betnation een speelvloer, een vijfsterrenhotel met 300 kamers en een keuken die verder gaat dan het gebruikelijke hotelmenu. De speelzaal opent om 21:00 uur en sluit om 05:00 uur; de hotelbalie en bijbehorende diensten draaien van 09:00 tot 23:00 uur. Wie in Amsterdam op zoek is naar een casino hotel waar spelen en overnachten in hetzelfde gebouw samenkomen, hoeft niet tussen twee adressen te kiezen.</p>
+  <main id="top">
+    <div class="container hero-wrap">
+      <section class="hero reveal" aria-labelledby="hero-title">
+        <div class="hero-media">
+          <img src="https://loremflickr.com/1800/1200/amsterdam,night,hotel?lock=1" alt="Amsterdam by night" loading="eager" />
+        </div>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow">Casino Hotel Amsterdam</div>
+            <h1 id="hero-title">Betnation: casino hotel aan de Javastraat</h1>
+            <p>Aan de Javastraat 1332 in Amsterdam-Oost combineert Betnation een speelvloer, een vijfsterrenhotel met 300 kamers en een keuken die verder gaat dan het gebruikelijke hotelmenu. De speelzaal opent om 21:00 uur en sluit om 05:00 uur; de hotelbalie en bijbehorende diensten draaien van 09:00 tot 23:00 uur. Wie in Amsterdam op zoek is naar een casino hotel waar spelen en overnachten in hetzelfde gebouw samenkomen, hoeft niet tussen twee adressen te kiezen.</p>
+          </div>
+          <aside class="hero-panel">
+            <div class="glass-card">
+              <div class="fact-grid">
+                <div class="fact"><strong>21:00–05:00</strong><span>De speelzaal opent om 21:00 uur en sluit om 05:00 uur.</span></div>
+                <div class="fact"><strong>09:00–23:00</strong><span>De hotelbalie en bijbehorende diensten draaien van 09:00 tot 23:00 uur.</span></div>
+                <div class="fact"><strong>300</strong><span>Vijfsterrenhotel met 300 kamers onder hetzelfde dak.</span></div>
+                <div class="fact"><strong>18+</strong><span>Toegang tot de speelvloer is voorbehouden aan gasten van 18 jaar en ouder.</span></div>
+              </div>
+            </div>
+            <div class="glass-card lead-note">
+              <p><strong>Toegang tot de speelvloer is voorbehouden aan gasten van 18 jaar en ouder</strong>, met verplichte legitimatie bij binnenkomst. Actuele spelregels en vergunningsinformatie liggen ter inzage bij de kassa en zijn ook bij de receptie op te vragen. Voor wie liever met beleid speelt, biedt het personeel op elk moment informatie over verantwoord spelen en, indien gewenst, zelfuitsluiting — dat hoort net zo bij de dienstverlening als het reserveren van een tafel.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </div>
 
-<p><strong>Toegang tot de speelvloer is voorbehouden aan gasten van 18 jaar en ouder</strong>, met verplichte legitimatie bij binnenkomst. Actuele spelregels en vergunningsinformatie liggen ter inzage bij de kassa en zijn ook bij de receptie op te vragen. Voor wie liever met beleid speelt, biedt het personeel op elk moment informatie over verantwoord spelen en, indien gewenst, zelfuitsluiting — dat hoort net zo bij de dienstverlening als het reserveren van een tafel.</p>
+    <div class="container main-content">
+      <span id="speelvloer" class="section-anchor" aria-hidden="true"></span>
+      <section class="section">
+        <div class="section-card">
+          <aside class="section-aside reveal">
+            <div class="section-index">01</div>
+            <h2>De speelvloer</h2>
+            <p>Roulette, blackjack, poker en gokkasten krijgen een visuele setting die meteen meer sfeer geeft, zonder de inhoud van de tekst te veranderen.</p>
+          </aside>
+          <div class="section-body">
+            <div class="image-mosaic reveal">
+              <figure class="visual-card">
+                <img src="https://loremflickr.com/1400/950/casino,poker,roulette?lock=2" alt="Casino interior with tables" loading="lazy" />
+                <figcaption class="visual-caption"><div><strong>Casino floor</strong><span>Avondsfeer met tafels en inzet.</span></div></figcaption>
+              </figure>
+              <div class="image-stack">
+                <figure class="visual-card">
+                  <img src="https://loremflickr.com/900/650/cards,chips,casino?lock=3" alt="Casino chips and cards" loading="lazy" />
+                  <figcaption class="visual-caption"><div><strong>Roulette &amp; poker</strong><span>Meer dynamiek en detail in beeld.</span></div></figcaption>
+                </figure>
+                <figure class="visual-card">
+                  <img src="https://loremflickr.com/900/650/lounge,night,bar?lock=4" alt="Night lounge ambiance" loading="lazy" />
+                  <figcaption class="visual-caption"><div><strong>Warme verlichting</strong><span>Rustige, zachte sfeer rond de speeltafels.</span></div></figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="content-box reveal">
+              <p>Roulette, blackjack en poker hebben elk hun eigen hoek van de zaal, met een duidelijk andere sfeer per tafel. Bij roulette loopt het na tienen doorgaans het snelst vol; het is de plek waar nieuwe gasten meestal als eerste gaan kijken. Blackjack trekt juist een rustiger, vaster publiek aan — spelers die de dealers bij naam kennen en liever aan één tafel blijven dan rondlopen. Poker draait op eigen tafels los van de rest van de vloer, wat toernooiavonden overzichtelijk houdt zonder dat het spel overloopt naar de rest van de zaal.</p>
+              <p>Daarnaast staat er een ruime rij gokkasten met inzetniveaus voor zowel beginners als ervaren spelers, zodat iemand die voor het eerst binnenloopt en een vaste bezoeker naast elkaar kunnen zitten zonder dat het ongemakkelijk voelt. Wat een speelvloer onderscheidt, zit zelden in het aanbod zelf — de meeste zalen in dit segment lijken qua tafels op elkaar. Het verschil zit in het tempo: of een tafel vol zit zonder gedrongen aan te voelen, of een dealer een gezicht van de vorige week nog herkent. Dat soort details staat niet op een lijst met voorzieningen, maar het is wel wat vaste gasten terug laat komen.</p>
+              <p>De verlichting boven de tafels is bewust laag gehouden, warm genoeg om lang te blijven zitten zonder dat het schermerig aanvoelt. Vloerbedekking dempt het geluid van stoelen en fiches, waardoor gesprekken aan de ene tafel niet doordringen tot de andere — iets wat in drukkere zalen elders in de stad vaak wel het geval is.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<h2>De speelvloer</h2>
+      <span id="kamers" class="section-anchor" aria-hidden="true"></span>
+      <section class="section">
+        <div class="section-card">
+          <aside class="section-aside reveal">
+            <div class="section-index">02</div>
+            <h2>300 kamers boven de zaal</h2>
+            <p>Een rustiger, hotelgerichte presentatie met skyline, kamerbeeld en snelle overzichtskaarten maakt deze sectie minder vlak.</p>
+          </aside>
+          <div class="section-body">
+            <figure class="visual-card reveal" style="min-height:430px;">
+              <img src="https://loremflickr.com/1600/1000/luxury,hotel,room?lock=5" alt="Luxury hotel room" loading="lazy" />
+              <figcaption class="visual-caption"><div><strong>Hotelvleugel</strong><span>Rustige kamers boven de speelvloer.</span></div></figcaption>
+            </figure>
+            <div class="content-box reveal">
+              <p>Betnation beslaat met zijn hotelvleugel een eigen verdieping boven de speelvloer, akoestisch gescheiden van het casino eronder. Gasten op de hogere verdiepingen merken vrijwel niets van de activiteit beneden — geen doorklinkend geluid van de zaal, geen licht dat door de gangen lekt. De kamers variëren van standaardtweepersoonskamers tot suites met uitzicht over de Amsterdamse skyline, met een interieur van donker hout en gedempte verlichting in plaats van een fel, opzichtig kleurenpalet dat sommige andere casinohotels wel gebruiken.</p>
+              <p>Elke kamer heeft dubbel glas dat straatgeluid grotendeels buitenhoudt, en de badkamers zijn afgewerkt met natuursteen in plaats van tegelwerk — een detail dat meer zegt over het niveau dan de sterrenclassificatie zelf. Suites op de hogere verdiepingen hebben een aparte zithoek, praktisch voor gasten die na een avond aan de tafels nog even rustig willen zitten voordat ze gaan slapen.</p>
+              <p>De receptie en bijbehorende diensten — inchecken, housekeeping, conciërgeverzoeken — zijn beschikbaar van 09:00 tot 23:00 uur. Buiten die uren blijft aankomst en vertrek gewoon mogelijk; alleen het bredere dienstenpakket ligt dan stil. Voor gasten die laat aankomen na een vlucht is dat meestal geen probleem, want de belangrijkste balie blijft ook 's nachts bemand voor in- en uitchecken.</p>
+              <div class="stats-strip">
+                <div class="stat-chip"><strong>Donker hout</strong><span>Gedempte verlichting in plaats van felle kleuren.</span></div>
+                <div class="stat-chip"><strong>Dubbel glas</strong><span>Straatgeluid blijft grotendeels buiten de kamer.</span></div>
+                <div class="stat-chip"><strong>Suites</strong><span>Aparte zithoek en uitzicht over de Amsterdamse skyline.</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<p>Roulette, blackjack en poker hebben elk hun eigen hoek van de zaal, met een duidelijk andere sfeer per tafel. Bij roulette loopt het na tienen doorgaans het snelst vol; het is de plek waar nieuwe gasten meestal als eerste gaan kijken. Blackjack trekt juist een rustiger, vaster publiek aan — spelers die de dealers bij naam kennen en liever aan één tafel blijven dan rondlopen. Poker draait op eigen tafels los van de rest van de vloer, wat toernooiavonden overzichtelijk houdt zonder dat het spel overloopt naar de rest van de zaal.</p>
+      <span id="diensten" class="section-anchor" aria-hidden="true"></span>
+      <section class="section">
+        <div class="section-card">
+          <aside class="section-aside reveal">
+            <div class="section-index">03</div>
+            <h2>Eten, herstel en de rest van het huis</h2>
+            <p>Hier krijgt de pagina meer ritme dankzij een collage met echte beelden van restaurant, spa, fitness en zakelijke setting.</p>
+          </aside>
+          <div class="section-body">
+            <div class="services-grid reveal">
+              <figure class="visual-card">
+                <img src="https://loremflickr.com/1200/900/fine,dining,restaurant?lock=6" alt="Restaurant interior" loading="lazy" />
+                <figcaption class="visual-caption"><div><strong>Restaurant</strong><span>Kleine, deelbare gerechten tot laat.</span></div></figcaption>
+              </figure>
+              <figure class="visual-card">
+                <img src="https://loremflickr.com/1200/900/spa,hotel,luxury?lock=7" alt="Hotel spa room" loading="lazy" />
+                <figcaption class="visual-caption"><div><strong>Spa</strong><span>Late speelavonden, rustige ochtenden.</span></div></figcaption>
+              </figure>
+              <figure class="visual-card">
+                <img src="https://loremflickr.com/1200/900/gym,fitness,hotel?lock=8" alt="Hotel gym" loading="lazy" />
+                <figcaption class="visual-caption"><div><strong>Fitnessruimte</strong><span>Vrije gewichten en cardioapparatuur.</span></div></figcaption>
+              </figure>
+              <figure class="visual-card">
+                <img src="https://loremflickr.com/1200/900/conference,meeting,room?lock=9" alt="Conference room" loading="lazy" />
+                <figcaption class="visual-caption"><div><strong>Conferentiezaal</strong><span>Zakelijke bijeenkomsten op de begane grond.</span></div></figcaption>
+              </figure>
+            </div>
+            <div class="content-box reveal">
+              <p>Rond de speeltafels heeft Betnation een reeks diensten opgebouwd die inspelen op late uren eerder dan op een standaard hotelschema. Een avond aan de tafels loopt vaak lang door, en de rest van het huis is daarop ingericht in plaats van op een gewoon dagritme.</p>
+              <ul class="feature-list">
+                <li>Het restaurant richt zich op kleine, deelbare gerechten — praktisch voor gasten die tussen twee sessies aan tafel even willen eten zonder een volledig diner te plannen. De keuken blijft tot laat open, iets wat in reguliere hotels zelden het geval is.</li>
+                <li>De <strong>spa</strong> opent pas laat in de ochtend, wat goed uitkomt voor wie tot na 03:00 uur aan de tafels heeft gezeten; behandelingen lopen van een korte massage tot een volledig dagprogramma.</li>
+                <li>De <strong>fitnessruimte</strong> is compact, maar uitgerust met vrije gewichten en cardioapparatuur voor een volledige training zonder groepsles — geopend vanaf de vroege ochtend voor gasten die liever trainen dan uitslapen.</li>
+                <li>Een <strong>conferentiezaal</strong> op de begane grond biedt plaats aan groepen tot ongeveer tachtig personen, meestal voor zakelijke bijeenkomsten die niets met het casino te maken hebben.</li>
+                <li>Gasten die met de auto komen, maken gebruik van de eigen <strong>parkeergelegenheid</strong> onder het gebouw; voor Schiphol is een vaste <strong>transferdienst</strong> beschikbaar die op aanvraag wordt ingepland.</li>
+              </ul>
+              <p>Deze diensten worden niet als hoofdattractie gepresenteerd — ze zorgen er simpelweg voor dat een lange avond aan de speeltafels de volgende ochtend nog behapbaar is. Geen van de onderdelen staat los van de rest: de spa sluit aan op late speelavonden, de fitnessruimte op vroege ochtenden, en de conferentiezaal op een heel ander soort bezoek dan het casino zelf aantrekt.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<p>Daarnaast staat er een ruime rij gokkasten met inzetniveaus voor zowel beginners als ervaren spelers, zodat iemand die voor het eerst binnenloopt en een vaste bezoeker naast elkaar kunnen zitten zonder dat het ongemakkelijk voelt. Wat een speelvloer onderscheidt, zit zelden in het aanbod zelf — de meeste zalen in dit segment lijken qua tafels op elkaar. Het verschil zit in het tempo: of een tafel vol zit zonder gedrongen aan te voelen, of een dealer een gezicht van de vorige week nog herkent. Dat soort details staat niet op een lijst met voorzieningen, maar het is wel wat vaste gasten terug laat komen.</p>
+      <span id="voordelen" class="section-anchor" aria-hidden="true"></span>
+      <section class="section">
+        <div class="section-card">
+          <aside class="section-aside reveal">
+            <div class="section-index">04</div>
+            <h2>Waarom een casino hotel in één gebouw verschil maakt</h2>
+            <p>Deze sectie is nu meer ervaringsgericht: één grote beeldkaart met stadssfeer en een compact, rustig tekstvlak.</p>
+          </aside>
+          <div class="section-body">
+            <div class="immersive-card reveal">
+              <img src="https://loremflickr.com/1800/1100/amsterdam,city,night?lock=10" alt="Amsterdam skyline at night" loading="lazy" />
+              <div class="immersive-copy">
+                <p>Wie in Amsterdam speelt en ergens anders slaapt, verliest tijd aan verplaatsen — een taxi laat in de nacht, een lift terug naar een hotelkamer aan de andere kant van de stad. Bij een casino hotel zoals Betnation valt die stap weg: de lift van de speelvloer naar de kamer duurt een paar minuten, niet een halfuur door de stad.</p>
+                <p>Dat heeft ook een keerzijde die de moeite waard is om te noemen: voor gasten die juist behoefte hebben aan afstand tussen spelen en slapen, is een apart hotel soms een bewustere keuze. Betnation richt zich op wie die afstand niet nodig heeft en liever de avond laat doorlopen zonder eerst te hoeven reizen.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<p>De verlichting boven de tafels is bewust laag gehouden, warm genoeg om lang te blijven zitten zonder dat het schermerig aanvoelt. Vloerbedekking dempt het geluid van stoelen en fiches, waardoor gesprekken aan de ene tafel niet doordringen tot de andere — iets wat in drukkere zalen elders in de stad vaak wel het geval is.</p>
+      <span id="praktisch" class="section-anchor" aria-hidden="true"></span>
+      <section class="section">
+        <div class="section-card">
+          <aside class="section-aside reveal">
+            <div class="section-index">05</div>
+            <h2>Praktisch: aankomst, kleding en indeling</h2>
+            <p>Met een stadsbeeld en compacter visueel ritme oogt ook het praktische deel minder als een standaard blok tekst.</p>
+          </aside>
+          <div class="section-body practical-grid">
+            <figure class="visual-card reveal" style="min-height:100%;">
+              <img src="https://loremflickr.com/1300/1500/amsterdam,street,night?lock=11" alt="Amsterdam street at night" loading="lazy" />
+              <figcaption class="visual-caption"><div><strong>Javastraat &amp; aankomst</strong><span>Rustiger woonwijk ten oosten van het centrum.</span></div></figcaption>
+            </figure>
+            <div class="content-box reveal">
+              <p>De Javastraat ligt in een rustige woonwijk ten oosten van het centrum, duidelijk anders van karakter dan het toeristische hart van de stad. Een taxi of de vaste transfer is eenvoudiger dan de tram midden in de nacht, zeker voor wie na sluitingstijd van de zaal nog moet reizen. De kledingcode is casual-chic: nette kleding volstaat op vrijwel elke tafel, al kleedt het pokergedeelte zich op toernooiavonden doorgaans iets formeler — meer gewoonte dan regel.</p>
+              <p>Inchecken bij Betnation en toegang tot de speelvloer verlopen via aparte balies — de polsband of lidmaatschapskaart voor het casino is niet dezelfde als de kamersleutel, en beide moeten los worden aangevraagd. Voor gasten die alleen komen spelen zonder te overnachten, is dat onderscheid vooral relevant bij een eerste bezoek; wie eenmaal weet waar welke balie zit, loopt er niet meer tegenaan.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<h2>300 kamers boven de zaal</h2>
+      <span id="faq" class="section-anchor" aria-hidden="true"></span>
+      <section class="section">
+        <div class="faq-shell reveal">
+          <div class="faq-head">
+            <div class="section-index">06</div>
+            <h2>Veelgestelde vragen</h2>
+          </div>
 
-<p>Betnation beslaat met zijn hotelvleugel een eigen verdieping boven de speelvloer, akoestisch gescheiden van het casino eronder. Gasten op de hogere verdiepingen merken vrijwel niets van de activiteit beneden — geen doorklinkend geluid van de zaal, geen licht dat door de gangen lekt. De kamers variëren van standaardtweepersoonskamers tot suites met uitzicht over de Amsterdamse skyline, met een interieur van donker hout en gedempte verlichting in plaats van een fel, opzichtig kleurenpalet dat sommige andere casinohotels wel gebruiken.
+          <article class="faq-item active">
+            <button class="faq-toggle" type="button" aria-expanded="true">
+              <h3>Hoe laat gaat de speelvloer open?</h3>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <div>
+                <p>De speelvloer is geopend van 21:00 tot 05:00 uur. De hotelbalie werkt op een apart schema van 09:00 tot 23:00 uur, al blijft in- en uitchecken ook buiten die uren mogelijk — alleen het bredere servicepakket ligt dan stil.</p>
+              </div>
+            </div>
+          </article>
 
-</p>
+          <article class="faq-item">
+            <button class="faq-toggle" type="button" aria-expanded="false">
+              <h3>Is er een kledingvoorschrift?</h3>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <div>
+                <p>Casual-chic is de standaard op vrijwel de hele vloer. Sportkleding of strandkleding is niet toegestaan, maar een jasje is niet verplicht, behalve soms bij pokertoernooien — en zelfs dat is eerder gewoonte dan officiële regel.</p>
+              </div>
+            </div>
+          </article>
 
-<p>Elke kamer heeft dubbel glas dat straatgeluid grotendeels buitenhoudt, en de badkamers zijn afgewerkt met natuursteen in plaats van tegelwerk — een detail dat meer zegt over het niveau dan de sterrenclassificatie zelf. Suites op de hogere verdiepingen hebben een aparte zithoek, praktisch voor gasten die na een avond aan de tafels nog even rustig willen zitten voordat ze gaan slapen.</p>
+          <article class="faq-item">
+            <button class="faq-toggle" type="button" aria-expanded="false">
+              <h3>Is er parkeergelegenheid?</h3>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <div>
+                <p>Ja, er is eigen parkeergelegenheid onder het gebouw, beschikbaar voor zowel hotelgasten als casinobezoekers. Voor Schiphol is daarnaast een vaste transferdienst te boeken, handig voor wie liever geen eigen vervoer regelt.</p>
+              </div>
+            </div>
+          </article>
 
-<p>De receptie en bijbehorende diensten — inchecken, housekeeping, conciërgeverzoeken — zijn beschikbaar van 09:00 tot 23:00 uur. Buiten die uren blijft aankomst en vertrek gewoon mogelijk; alleen het bredere dienstenpakket ligt dan stil. Voor gasten die laat aankomen na een vlucht is dat meestal geen probleem, want de belangrijkste balie blijft ook 's nachts bemand voor in- en uitchecken.</p>
+          <article class="faq-item">
+            <button class="faq-toggle" type="button" aria-expanded="false">
+              <h3>Vanaf welke leeftijd mag ik naar de speelvloer?</h3>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <div>
+                <p>Vanaf 18 jaar, strikt gecontroleerd met legitimatie bij de ingang. Dit geldt specifiek voor de speelvloer; de hotelkamers zijn toegankelijk voor gasten van alle leeftijden, maar toegang tot het casino wordt apart en los daarvan gecontroleerd.</p>
+              </div>
+            </div>
+          </article>
+        </div>
 
-<h2>Eten, herstel en de rest van het huis</h2>
+        <div class="closing-card reveal">
+          <p>Tussen de speelvloer, de kamers en de diensten ertussen zit geen enkel onderdeel dat op zichzelf de reden is om te komen — het is de combinatie die maakt dat een gast van blackjack naar de spa naar een stille kamer kan lopen zonder het gebouw te verlaten.</p>
+        </div>
+      </section>
 
-<p>Rond de speeltafels heeft Betnation een reeks diensten opgebouwd die inspelen op late uren eerder dan op een standaard hotelschema. Een avond aan de tafels loopt vaak lang door, en de rest van het huis is daarop ingericht in plaats van op een gewoon dagritme.</p>
+      <div class="footer-note">Betnation casino hotel Amsterdam</div>
+    </div>
+  </main>
 
-<ul>
-<li>Het restaurant richt zich op kleine, deelbare gerechten — praktisch voor gasten die tussen twee sessies aan tafel even willen eten zonder een volledig diner te plannen. De keuken blijft tot laat open, iets wat in reguliere hotels zelden het geval is.</li>
-<li>De <strong>spa</strong> opent pas laat in de ochtend, wat goed uitkomt voor wie tot na 03:00 uur aan de tafels heeft gezeten; behandelingen lopen van een korte massage tot een volledig dagprogramma.</li>
-<li>De <strong>fitnessruimte</strong> is compact, maar uitgerust met vrije gewichten en cardioapparatuur voor een volledige training zonder groepsles — geopend vanaf de vroege ochtend voor gasten die liever trainen dan uitslapen.</li>
-<li>Een <strong>conferentiezaal</strong> op de begane grond biedt plaats aan groepen tot ongeveer tachtig personen, meestal voor zakelijke bijeenkomsten die niets met het casino te maken hebben.</li>
-<li>Gasten die met de auto komen, maken gebruik van de eigen <strong>parkeergelegenheid</strong> onder het gebouw; voor Schiphol is een vaste <strong>transferdienst</strong> beschikbaar die op aanvraag wordt ingepland.</li>
-</ul>
+  <script>
+    (() => {
+      const progress = document.querySelector('.progress');
+      const reveals = document.querySelectorAll('.reveal');
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-<p>Deze diensten worden niet als hoofdattractie gepresenteerd — ze zorgen er simpelweg voor dat een lange avond aan de speeltafels de volgende ochtend nog behapbaar is. Geen van de onderdelen staat los van de rest: de spa sluit aan op late speelavonden, de fitnessruimte op vroege ochtenden, en de conferentiezaal op een heel ander soort bezoek dan het casino zelf aantrekt.</p>
+      const setProgress = () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const value = max > 0 ? (window.scrollY / max) * 100 : 0;
+        progress.style.width = value + '%';
+      };
 
-<h2>Waarom een casino hotel in één gebouw verschil maakt</h2>
+      if (prefersReduced) {
+        reveals.forEach(el => el.classList.add('visible'));
+      } else {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              io.unobserve(entry.target);
+            }
+          });
+        }, {threshold: 0.12});
+        reveals.forEach(el => io.observe(el));
+      }
 
-<p>Wie in Amsterdam speelt en ergens anders slaapt, verliest tijd aan verplaatsen — een taxi laat in de nacht, een lift terug naar een hotelkamer aan de andere kant van de stad. Bij een casino hotel zoals Betnation valt die stap weg: de lift van de speelvloer naar de kamer duurt een paar minuten, niet een halfuur door de stad.</p>
+      const toggles = document.querySelectorAll('.faq-toggle');
+      toggles.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.faq-item');
+          const active = item.classList.contains('active');
+          document.querySelectorAll('.faq-item').forEach(it => {
+            it.classList.remove('active');
+            it.querySelector('.faq-toggle').setAttribute('aria-expanded', 'false');
+          });
+          if (!active) {
+            item.classList.add('active');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
 
-<p>Dat heeft ook een keerzijde die de moeite waard is om te noemen: voor gasten die juist behoefte hebben aan afstand tussen spelen en slapen, is een apart hotel soms een bewustere keuze. Betnation richt zich op wie die afstand niet nodig heeft en liever de avond laat doorlopen zonder eerst te hoeven reizen.</p>
-
-<h2>Praktisch: aankomst, kleding en indeling</h2>
-
-<p>De Javastraat ligt in een rustige woonwijk ten oosten van het centrum, duidelijk anders van karakter dan het toeristische hart van de stad. Een taxi of de vaste transfer is eenvoudiger dan de tram midden in de nacht, zeker voor wie na sluitingstijd van de zaal nog moet reizen. De kledingcode is casual-chic: nette kleding volstaat op vrijwel elke tafel, al kleedt het pokergedeelte zich op toernooiavonden doorgaans iets formeler — meer gewoonte dan regel.</p>
-
-<p>Inchecken bij Betnation en toegang tot de speelvloer verlopen via aparte balies — de polsband of lidmaatschapskaart voor het casino is niet dezelfde als de kamersleutel, en beide moeten los worden aangevraagd. Voor gasten die alleen komen spelen zonder te overnachten, is dat onderscheid vooral relevant bij een eerste bezoek; wie eenmaal weet waar welke balie zit, loopt er niet meer tegenaan.</p>
-
-<h2>Veelgestelde vragen</h2>
-
-<h3>Hoe laat gaat de speelvloer open?</h3>
-<p>De speelvloer is geopend van 21:00 tot 05:00 uur. De hotelbalie werkt op een apart schema van 09:00 tot 23:00 uur, al blijft in- en uitchecken ook buiten die uren mogelijk — alleen het bredere servicepakket ligt dan stil.</p>
-
-<h3>Is er een kledingvoorschrift?</h3>
-<p>Casual-chic is de standaard op vrijwel de hele vloer. Sportkleding of strandkleding is niet toegestaan, maar een jasje is niet verplicht, behalve soms bij pokertoernooien — en zelfs dat is eerder gewoonte dan officiële regel.</p>
-
-<h3>Is er parkeergelegenheid?</h3>
-<p>Ja, er is eigen parkeergelegenheid onder het gebouw, beschikbaar voor zowel hotelgasten als casinobezoekers. Voor Schiphol is daarnaast een vaste transferdienst te boeken, handig voor wie liever geen eigen vervoer regelt.</p>
-
-<h3>Vanaf welke leeftijd mag ik naar de speelvloer?</h3>
-<p>Vanaf 18 jaar, strikt gecontroleerd met legitimatie bij de ingang. Dit geldt specifiek voor de speelvloer; de hotelkamers zijn toegankelijk voor gasten van alle leeftijden, maar toegang tot het casino wordt apart en los daarvan gecontroleerd.</p>
-
-<p>Tussen de speelvloer, de kamers en de diensten ertussen zit geen enkel onderdeel dat op zichzelf de reden is om te komen — het is de combinatie die maakt dat een gast van blackjack naar de spa naar een stille kamer kan lopen zonder het gebouw te verlaten.</p>
-
+      setProgress();
+      window.addEventListener('scroll', setProgress, {passive:true});
+      window.addEventListener('resize', setProgress);
+    })();
+  </script>
 </body>
 </html>
